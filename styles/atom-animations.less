@@ -1,0 +1,91 @@
+// Atom Animations... nice!
+
+@cursor-animation-time: 100ms;
+@ui-animation-time: 170ms;
+@ui-animation-time-incremental-delay: 16ms;
+@cursor-animation-function: cubic-bezier(0,0,0.1,1);
+
+// Some animations for below
+@keyframes popup{
+  from{
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+@keyframes popdown{
+  from{
+    transform: translateY(-15px);
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+atom-text-editor .cursor {
+  // Cursor movement and blink
+  transition: transform @cursor-animation-time @cursor-animation-function,
+              opacity 300ms @cursor-animation-function;
+}
+
+atom-text-editor {
+  // Current editor line
+  .lines .line, .line-number{
+    transition: background-color @ui-animation-time @cursor-animation-function,
+                color @ui-animation-time @cursor-animation-function,
+                border @ui-animation-time @cursor-animation-function,
+                box-shadow @ui-animation-time @cursor-animation-function;
+  }
+
+  // Selection
+  .highlight .region{
+    transition: left @cursor-animation-time @cursor-animation-function,
+                width @cursor-animation-time @cursor-animation-function;
+  }
+
+  // Smooth scroll
+  .scroll-view>*, .gutter-container>* {
+    transition: transform @cursor-animation-time @cursor-animation-function;
+  }
+  // .wrap-guide{
+  //   transition: left @cursor-animation-time @cursor-animation-function;
+  // }
+}
+
+// Global list item fading
+li::before, li{
+  transition: background-color @ui-animation-time @cursor-animation-function,
+              color @ui-animation-time @cursor-animation-function !important;
+}
+ol,ul {
+  animation: popdown @ui-animation-time @cursor-animation-function;
+  animation-fill-mode: both;
+}
+autocomplete-suggestion-list ol{ // Stop scrollbar from appearing in autocomplete
+  animation:none;
+}
+
+/*
+li:not(.tab){
+  animation: popup @ui-animation-time @cursor-animation-function;
+  animation-fill-mode: both;
+}
+
+.generate-cascade(20);
+
+.generate-cascade(@i) when (@i >= 1) {
+  li:nth-child(@{i}) {
+    animation-delay:@i*@ui-animation-time-incremental-delay;
+  }
+  .generate-cascade(@i - 1);
+}
+*/
+
+// Animate Autocomplete (and others)
+atom-overlay,atom-panel-container,atom-panel:not(.modal){
+  animation: popup @ui-animation-time @cursor-animation-function;
+}

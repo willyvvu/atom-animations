@@ -1,0 +1,14 @@
+{
+  "name": "atom-animations",
+  "version": "0.0.0",
+  "description": "A set of subtle, snappy animations to brighten your day.",
+  "keywords": [
+  ],
+  "repository": "https://github.com/willy-vvu/atom-animations",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}
